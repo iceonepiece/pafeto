@@ -1,0 +1,14 @@
+<input type="file">
+
+
+<input type="text" id="file-upload">
+
+<script>
+	$(document).ready( function(){
+		$("input:file").change( function(){
+			alert("YOU");
+			var fileName = $(this).val();
+			$("#file-upload").val(fileName);
+		});
+	});
+</script>

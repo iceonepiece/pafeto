@@ -1,0 +1,9 @@
+doctype html
+html
+	head
+		title Admin Pafeto
+	body
+		h3 Restaurant List
+		each restaurant in restaurantList
+			p
+				a(href='/restaurants/' + restaurant.id + '/edit')= restaurant.name

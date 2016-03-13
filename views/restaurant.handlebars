@@ -1,0 +1,37 @@
+<div class="container" style="margin-top: 30px; width: 720px">
+   	<div class="text-center">
+   		<img style="margin-bottom: 10px; width: 150px; height: 150px;" src="/images/restaurants/{{restaurant.id}}.png">
+   		<div class="pafeto-text-title">{{restaurant.name}}</div>
+   		<div class="pafeto-dish-price"><b>ประเภท:</b> {{restaurant.cuisine_name}}</div>
+   		<div class="pafeto-dish-description" style="margin-top: 10px; margin-bottom: 10px;">
+   			{{restaurant.description}}
+   		</div>
+   		<div class="pafeto-dish-description" style="font-size: 20px;">
+   			<a href="{{restaurant.link}}">เข้าสู่เว็บไซต์ร้าน</a>
+   		</div>		
+   	</div>
+</div>
+
+<div class="container" style="margin-top: 40px;">
+	{{#each dishes}}
+  		<div class="col-xs-6 col-md-3">
+      		<div class="pafesto-wrapper">
+				<img class="pafesto-image" src="/images/dishes/{{id}}.png">
+		   		<div class="pafesto-text dish-name">{{name}}</div> 
+		   		<div class="pafesto-text dish-price">{{price}} บาท</div> 
+		   		<a class="pafesto-link" href="/dish/{{id}}"></a>
+      		</div>
+  		</div>
+  	{{/each}}
+</div>
+
+<script>
+	
+		$(document).on("mouseenter", ".pafesto-wrapper", function() {
+		    $(this).children(".pafesto-text").css('visibility', 'visible');
+		});
+
+		$(document).on("mouseleave", ".pafesto-wrapper", function() {
+		    $(this).children(".pafesto-text").css('visibility', 'hidden');
+		});
+</script>

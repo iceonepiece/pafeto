@@ -1,0 +1,164 @@
+<div class="text-center">
+	<div class="pafeto-text-title">ค้นหาร้านอาหาร</div>
+
+	<div class="text-center" style="width: 560px; margin: auto; margin-top: 20px;"> 
+		<div class="lefter" style="float: left; width: 280px;">
+			<div style="font-size:18px; font-weight: bold;">พื้นที่ให้บริการ</div>
+			<div class="btn-group" style="margin-top: 5px;">
+			  	<button type="button" class="btn btn-default btn-lg" style="width: 220px">
+					{{ location_name }}
+				</button>
+
+		  		<button type="button" class="btn btn-default btn-lg dropdown-toggle" 
+		  			data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    		<span class="caret"></span>
+		    		<span class="sr-only">Toggle Dropdown</span>
+		  		</button>
+
+			  	<ul class="dropdown-menu">
+			  		{{#each locationList}}
+    					<li>
+    						<a class="filter-item location" id="{{@key}}" href="/restaurants?location={{@key}}">
+    							{{this}}
+    						</a>
+    					</li>
+					{{/each}}
+				</ul>
+			</div>
+		</div>
+
+		<div class="righter" >
+			<div style="font-size:18px; font-weight: bold;">ประเภทอาหาร</div>
+			<div class="btn-group" style="margin-top: 5px;">
+			  	<button type="button" class="btn btn-default btn-lg" style="width: 220px">
+					{{ cuisine_name }}
+				</button>
+
+		  		<button type="button" class="btn btn-default btn-lg dropdown-toggle" 
+		  			data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    		<span class="caret"></span>
+		    		<span class="sr-only">Toggle Dropdown</span>
+		  		</button>
+
+			  	<ul class="dropdown-menu">
+
+			  	{{#each cuisineList}}
+    				<li>
+    					<a class="filter-item cuisine" id="{{@index}}" href="/restaurants?cuisine={{@index}}">
+    						{{this}}
+    					</a>
+    				</li>
+				{{/each}}
+
+				</ul>
+
+			</div>
+		</div>
+
+	</div>
+
+		
+</div>
+
+<div class="container" style="margin-top: 30px;">
+	
+	<div style="font-size: 24px; font-weight: bold; text-align: center;">ทั้งหมด {{num}} ร้าน</div>
+
+	{{#each restaurants}}
+		<div class="pafeto-restaurant-wrapper">
+	      	<img class="pafeto-restaurant-image" src="/images/restaurants/{{id}}.png">
+	      	<div class="pafeto-restaurant-name"><a href="/restaurant/{{id}}">{{name}}</a></div> 
+	      	<div class="pafeto-restaurant-cuisine"><b>ประเภท:</b> {{cuisine_name}}</div> 
+	      	<div class="pafeto-restaurant-description">{{description}}</div> 
+	  	</div>
+	  	<div><hr width="750"></div>
+	{{/each}}
+</div>
+
+
+<script>
+	
+		$(document).on("mouseenter", ".pafesto-wrapper", function() {
+		    $(this).children(".pafesto-text").css('visibility', 'visible');
+		});
+
+		$(document).on("mouseleave", ".pafesto-wrapper", function() {
+		    $(this).children(".pafesto-text").css('visibility', 'hidden');
+		});
+
+		$(document).ready( function(){
+			
+			$(".filter-item").click(function(event){
+  
+  				var lastClass = $(this).attr('class').split(' ').pop();
+				
+	    		var location = getUrlParameter('location');
+	    		var cuisine = getUrlParameter('cuisine');
+
+	    		if( lastClass == "location" ){
+	    			location = $(this).attr('id');
+	    		}
+
+	    		if( lastClass == "cuisine" ){	
+	    			cuisine = $(this).attr('id');
+	    		}
+
+				
+				var optionList = [];
+
+				if( location !== undefined && location != "all" )
+				{
+					optionList.push( 'location=' + location );
+				}
+
+				if( cuisine !== undefined && cuisine != "0" )
+				{
+					optionList.push( 'cuisine=' + cuisine );
+				}
+
+				var optionString = getOptionString(optionList);
+
+				var targetUrl = "/restaurants";
+
+				if( optionString != "" )
+				{
+					targetUrl += "?" + optionString;
+				}
+				window.location.href = targetUrl;
+				
+				return false;
+			});
+
+			function getUrlParameter( key ){
+				var pageUrl = window.location.search.substring(1);
+				var urlVariables = pageUrl.split('&');
+
+				for( var i = 0; i < urlVariables.length; i++ )
+				{
+					var paramName = urlVariables[i].split('=');
+					if( paramName[0] == key )
+					{
+						return paramName[1];
+					}
+				}
+			}
+
+			function getOptionString( optionList ){
+
+				var optionString = "";
+				for( var i = 0; i < optionList.length; i++ ){
+					
+					optionString += optionList[i];
+
+					if( (i + 1) < optionList.length )
+					{
+						optionString += "&";
+					}
+				}
+
+				return optionString;
+			}
+	
+		});
+	
+</script>

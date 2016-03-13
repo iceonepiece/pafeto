@@ -1,0 +1,59 @@
+
+<h3 class="text-center">จัดการข้อมูลร้าน</h3>
+
+<div style="margin: auto; width: 720px; background: #FAFAFA;">
+<form method="post" action="/manage/{{restaurant._id}}/update" enctype="multipart/form-data">
+
+<dl>
+	<dt>
+		<label>รูปโลโก้</label>
+	</dt>
+	<dd>
+		<img  width="140px" height="140px" src="/images/restaurants/{{restaurant.logoImage}}"><br>
+		<label class="btn btn-default">
+	    	<input id="my-file-selector" type="file" style="display:none;">
+	    	<b>เปลี่ยนรูปโลโก้</b>
+		</label>
+	</dd>
+</dl>
+
+<dl>
+	<dt>
+		<label><b>ชื่อร้าน</b></label>
+	</dt>
+	<dd>
+		<input type="text" name="name" size="30" value="{{restaurant.name}}" >
+	</dd>
+</dl>
+
+<dl>
+	<dt>
+		<label><b>คำอธิบาย</b></label>
+	</dt>
+	<dd>
+		<input type="text" name="description" size="30" value="{{restaurant.description}}">
+	</dd>
+</dl>
+
+<dl>
+	<dt>
+		<label><b>เว็บไซท์</b></label>
+	</dt>
+	<dd>
+		<input type="text" name="web" size="30" value="{{restaurant.web}}">
+	</dd>
+</dl>
+
+<dl>
+	<dt>
+		<label><b>ประเภทร้าน</b></label>
+	</dt>
+	<dd>
+		{{restaurant.cuisines}}
+	</dd>
+</dl>
+
+<div><button class="btn btn-primary">บันทึกข้อมูลร้าน</button></div>
+</form>
+
+</div>

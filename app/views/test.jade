@@ -1,0 +1,13 @@
+extends layout
+
+block content
+	div(class="container")
+		div(class="columns")
+			div(class="column one-width")
+				h3 ประเภทอาหาร
+			div(class="column three-width", style="background-color: #666")
+				div(class="paginate-container", style="background-color: #999")
+					include ./components/pagination.jade
+				div(class="dish-list-container", style="background-color: #FFF")
+					include ./components/dishList.jade
+		

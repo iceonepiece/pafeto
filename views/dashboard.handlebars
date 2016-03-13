@@ -1,0 +1,13 @@
+<h3>Dashboard</h3>
+<a href="/logout">ออกจากระบบ</a>
+
+<h3>ร้านของฉัน</h3>
+{{#each restaurants}}
+<div class="pafeto-restaurant-wrapper">
+	<img class="pafeto-restaurant-image" src="/images/restaurants/{{logoImage}}">
+	<div class="pafeto-restaurant-name"><a href="/restaurant/{{_id}}">{{name}}</a></div> 
+	<div class="pafeto-restaurant-cuisine"><b>ประเภท:</b> {{cuisine_name}}</div> 
+	<div class="pafeto-restaurant-description">{{description}}</div> 
+	<div style="margin-left: 180px"><a class="btn btn-primary" href="/manage/{{_id}}">จัดการร้าน</a></div>
+</div>
+{{/each}}

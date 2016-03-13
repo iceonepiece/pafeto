@@ -1,0 +1,17 @@
+<div style="margin: auto; background: #F4F4F4; width: 800px">
+<h3>สร้างหน้าร้านอาหารของคุณ</h3>
+<div class="errorText">{{errors}}</div>
+<form action="/create" method="post" enctype="multipart/form-data">
+<div>โลโก้ร้าน: <input type="file" name="restaurantLogo"></div>
+<div>ชื่อร้าน: <input type="text" name="restaurantName"></div>
+<div>คำอธิบาย:<br><input type="text" name="restaurantDescription"></div>
+<div>เว็บไซต์: <input type="text" name="web"></div>
+
+{{#each cuisineList}}
+	<div><input type="checkbox" name="cuisine" value="{{@index}}">{{this}}</div>
+{{/each}}
+
+<button class="btn-primary" type="submit">สร้างร้าน</button>
+</form>
+
+</div>

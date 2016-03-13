@@ -1,0 +1,24 @@
+<div style="font-size: 24px; font-weight: bold; text-align: center;">ทั้งหมด {{num}} ร้าน</div>
+<div class="restaurant-container" style="margin-top: 30px;">
+</div>
+
+<script>
+	var dishResult = {{{result}}};
+</script>
+
+<script>
+	var resultString = "";
+	for( var i = 0; i < dishResult.length; i++ ){
+		resultString += '<div class="pafeto-restaurant-wrapper">';
+		resultString += '<img class="pafeto-restaurant-image" src="/images/restaurants/' + dishResult[i].id + '.png">';
+		resultString += '<div class="pafeto-restaurant-name"><a href="/restaurant/' 
+					+ dishResult[i].id + '">'+ dishResult[i].name + '</a></div>';
+
+		resultString += '<div class="pafeto-restaurant-description"><b>ประเภท:</b>' 
+						+ dishResult[i].cuisine_name + '</div>'; 
+		resultString +=	'<div class="pafeto-restaurant-description">'
+						+ dishResult[i].description + '</div></div>'; 
+
+	}
+	$(".restaurant-container").html( resultString );
+</script>

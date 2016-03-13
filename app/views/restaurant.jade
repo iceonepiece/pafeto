@@ -1,0 +1,65 @@
+extends layout
+
+block content
+
+	div(class="main-content")
+		div(class="pagehead")
+			div(class="container text-center")
+				div(style="width: 650px; margin: auto;")
+					div
+						img(src="/img/restaurants/" + restaurant.id + ".png", width="120px", height="120px")
+					div(class="pafeto-text-title", style="margin-top: 10px")= restaurant.name
+					div(class="pafeto-restaurant-description", style="margin-top: 5px; font-size: 18px;")= restaurant.description
+
+		div(class="container")
+			div(class="columns")
+				div(class="column one-width", style="border: 1px solid #ccc; margin-top: 10px")
+					
+					if restaurant.phone
+						div(class="pafeto-info-text", style="margin-top: 15px")
+							b หมายเลขโทรศัพท์
+							br
+							= restaurant.phone
+
+					div(class="pafeto-info-text", style="margin-top: 15px")
+						b ประเภทอาหาร
+						br
+						= restaurant.cuisine_name
+					
+					div(class="pafeto-info-text", style="margin-top: 15px")
+						b พื้นที่จัดส่ง
+						br
+						= areaName
+
+					div(class="pafeto-info-text", style="margin-top: 15px")
+						b ลิงก์ของร้าน
+						br
+						if restaurant.web
+							div
+								a(href=restaurant.web) Website
+
+						if restaurant.fb
+							div
+								a(href=restaurant.fb) Facebook
+
+						if restaurant.ig
+							div
+								a(href=restaurant.ig) Instagram
+
+						if restaurant.line
+							div
+								a(href=restaurant.line) Line
+
+
+				div(class="column three-width")
+					each dish in dishList
+						div(class="dish-column")
+							div(class="pafeto-dish-wrapper")
+								a(class="pafeto-dish-link", href="/dishes/" + dish.id)
+									img(class="pafeto-dish-image", src="/img/dishes/" + dish.id + ".png" alt=dish.name)
+					
+								div(style="margin-top: 10px; padding-left: 8px; padding-right: 8px;")
+									a(class="dish-name", href="/dishes/" + dish.id)= dish.name
+
+								div(style="margin-top: 4px; padding-left: 8px; padding-right: 8px;")
+									span(class="dish-price") ฿ #{dish.price}

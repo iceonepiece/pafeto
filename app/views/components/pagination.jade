@@ -1,0 +1,19 @@
+div(class="pagination")
+	if isFirstPage
+		span(class="page-button") <<
+		span(class="page-button") <                           
+	else
+		span(class="page-button")
+			a(href=cleanUrl) <<
+		span(class="page-button")
+			a(href=cleanUrl + "&page=" + (pageNumber-1)) <
+	span(class="page-button")= num
+							
+	if isLastPage
+		span(class="page-button") >
+		span(class="page-button") >>                           
+	else
+		span(class="page-button") 
+			a(href=cleanUrl + "&page=" + (pageNumber+1)) >
+		span(class="page-button") 
+			a(href=cleanUrl + "&page=" + lastPage) >>

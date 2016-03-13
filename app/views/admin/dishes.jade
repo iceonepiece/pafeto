@@ -1,0 +1,9 @@
+doctype html
+html
+	head
+		title Admin Pafeto
+	body
+		h3 Dish List
+		each dish in dishList
+			p
+				a(href='/dishes/' + dish.id + '/edit')= dish.name

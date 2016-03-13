@@ -1,0 +1,86 @@
+extends layout
+
+block content
+    
+    div(class="main-content")
+        div(class="pagehead")
+            div(class="container text-center")
+                h3 ค้นหาเมนูอาหาร
+                div(class="btn-group", style="margin-top: 20px")
+                    button(type="button", class="btn btn-default btn-lg", style="width: 300px")
+                        font(style="float: left")
+                            span(class="glyphicon glyphicon-map-marker", aria-hidden="true")
+                        = currentArea
+
+                    button(type="button", class="btn btn-default btn-lg dropdown-toggle",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false")
+                        span(class="caret")
+                        span(class="sr-only") Toggle Dropdown
+
+                    ul(class="dropdown-menu")
+                        each area, key in areaList
+                            li
+                                a(class="area-filter", id=key, href="/dishes?area=" + key)= area
+    
+        div(class="container")
+            div(class="columns")
+                div(class="column one-width")
+                    h3 ประเภทอาหาร
+                    ul(class="list-unstyled")
+                        each cuisine in cuisineFilters
+                            li
+                                a(class="filter-item cuisine-text", id=cuisine.index, href="/dishes?cuisines=" + cuisine.index)
+                                    span(style="color: #FA4500", class="glyphicon glyphicon-" + cuisine.checking, aria-hidden="true")
+                                    |  #{cuisine.name}
+
+                div(class="column three-width")
+                    div(class="sort-bar")
+                        div(class="btn-group", style="float: right; position: relative")
+                            button(type="button", class="btn btn-default", style="width: 150px")
+                                = currentSort
+                            
+                            button(type="button", class="btn btn-default dropdown-toggle", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false")
+                                span(class="caret")
+                                span(class="sr-only") Toggle Dropdown
+
+                            ul(class="dropdown-menu")
+                                each sort, key in sortList
+                                    li
+                                        a(class="filter-item sort", id=key, href="/dishes?sort=" + key )= sort
+                        div
+                            if isFirstPage
+                                span(class="page-button") <<
+                                span(class="page-button") <                           
+                            else
+                                span(class="page-button")
+                                    a(href=cleanUrl) <<
+                                span(class="page-button")
+                                    a(href=cleanUrl + "&page=" + (pageNumber-1)) <
+                            span(class="page-button")= num
+                            
+                            if isLastPage
+                                span(class="page-button") >
+                                span(class="page-button") >>                           
+                            else
+                                span(class="page-button") 
+                                    a(href=cleanUrl + "&page=" + (pageNumber+1)) >
+                                span(class="page-button") 
+                                    a(href=cleanUrl + "&page=" + lastPage) >>
+                    div(class="main-container")
+                        div(class="rows")
+                            each dish in dishList
+                                div.dish-column
+                                    div(class="pafeto-dish-wrapper")
+                                        a(class="pafeto-dish-link", href="/dishes/" + dish.id)
+                                            img(class="pafeto-dish-image", src="/img/dishes/" + dish.id + ".png" alt=dish.name)
+
+                                        div(style="margin-top: 10px; padding-left: 10px; padding-right: 10px;")
+                                            a(class="dish-name", href="/dishes/" + dish.id)= dish.name
+
+                                        div(style="margin-top: 4px; padding-left: 10px; padding-right: 10px;")
+                                            span(class="dish-restaurant")
+                                                a(href="/restaurants/" + dish.restaurant_id)
+                                                    font(style='color: #454545;')= dish.restaurant_name
+                                            span(class="dish-price") ฿#{dish.price}
+                    div
+                        h1 yo
+    script(src="/js/dishes.js")

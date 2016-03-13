@@ -1,0 +1,17 @@
+extends layout
+
+block content
+
+	div(class="container", style="margin-top: 60px; min-height: 400px;")
+		img(src="/img/dishes/" + dish.id +".png", class="dish-image")
+		div(class="pafeto-dish-info")
+			div(class="pafeto-text-title")= dish.name
+			div(class="pafeto-text-restaurant") ร้าน 
+				a(href="/restaurants/" + dish.restaurant_id)= dish.restaurant_name
+			div(class="pafeto-text-price") #{dish.price} บาท
+			div(class="pafeto-text-description") 
+				b คำอธิบาย 
+				br
+				= dish.description
+
+

@@ -1,0 +1,11 @@
+{{restaurant.name}}
+<h3>เพิ่มเมนูใหม่</h3>
+<form action="/manage/{{restaurant._id}}/new_dish" method="post">
+	<div>ชื่อเมนู: <input type="text" name="name"></div>
+	<div>คำอธิบาย: <input type="text" name="description"></div>
+	<div>ราคา (บาท): <input type='text' name='price'></div>
+	{{#each cuisineList}}
+	<div><input type="checkbox" name="cuisine" value="{{@index}}">{{this}}</div>
+	{{/each}}
+	<div><input type="submit" Value="เพิ่มเมนู"></div>
+</form>

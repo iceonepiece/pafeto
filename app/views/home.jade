@@ -1,0 +1,36 @@
+extends homeLayout
+
+block content
+	h1(style='font-size: 52px; margin-top: 100px') ยินดีต้อนรับสู่ Pafeto
+	h3(style='margin-top: 20px; font-weight: 500') ค้นหาเมนูอาหารจากร้านที่ให้บริการส่งถึงที่
+	
+	form(action='/dishes', method='get')
+		div(class="btn-group", style="margin-top: 40px")
+			button(type="button", class="btn btn-default btn-lg", style="width: 300px")
+				font(style="float: left")
+					span(class="glyphicon glyphicon-map-marker", aria-hidden="true")
+				span(class='current-area') พื้นที่ให้บริการ
+
+			button(type="button", class="btn btn-default btn-lg",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false")
+				span(class="caret")
+				span(class="sr-only") Toggle Dropdown
+
+			ul(class="dropdown-menu")
+				each area, key in areaList
+					li
+						a(class="area-filter", id=key, href="javascript:void(0);")= area
+			
+			button(type="submit", class="btn btn-danger btn-lg", style='width: 100px') ค้นหา		
+
+		input(type='hidden', class='area-query', name='area', value='bkk')
+
+block script
+	script var areaList = !{JSON.stringify(areaList)};
+	script.
+		$('.area-filter').click(function(){
+			var key = $(this).attr('id');
+			$('.current-area').html( areaList[key] );
+			$('.area-query').val(key);
+		});
+
+		

@@ -1,0 +1,242 @@
+<div class="text-center">
+<div class="pafeto-text-title">ค้นหาเมนูอาหาร</div>
+
+<div class="btn-group" style="margin-top: 20px">
+
+	<button type="button" class="btn btn-default btn-lg" style="width: 200px" >
+		{{ cuisine_name }}
+	</button>
+
+  	<button type="button" class="btn btn-default btn-lg dropdown-toggle" 
+  		data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    	<span class="caret"></span>
+    	<span class="sr-only">Toggle Dropdown</span>
+  	</button>
+
+  	<ul class="dropdown-menu">
+  	  	{{#each cuisineList}}
+    		<li><a class="filter-item cuisine" id="{{@key}}" href="/dishes?cuisine={{@index}}">{{this}}</a></li>
+		{{/each}}
+	</ul>
+
+</div>
+
+
+<div class="btn-group" style="margin-top: 20px">
+  
+	<button type="button" class="btn btn-default btn-lg" style="width: 200px" >
+		{{sort_text}}
+	</button>
+
+  	<button type="button" class="btn btn-default btn-lg dropdown-toggle" 
+  		data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    	<span class="caret"></span>
+    	<span class="sr-only">Toggle Dropdown</span>
+  	</button>
+
+  	<ul class="dropdown-menu">
+  		{{#each sortList}}
+    		<li><a class="filter-item sort" id="{{@key}}" href="/dishes?sort={{@key}}">{{this}}</a></li>
+		{{/each}}
+	</ul>
+</div>
+
+  	<div class="btn-group" style="margin-top: 20px;">
+			  	<button type="button" id="current_view" class="btn btn-default btn-lg" style="width: 220px">
+				</button>
+
+		  		<button type="button" class="btn btn-default btn-lg dropdown-toggle" 
+		  			data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    		<span class="caret"></span>
+		    		<span class="sr-only">Toggle Dropdown</span>
+		  		</button>
+
+			  	<ul class="dropdown-menu">
+			  	
+    					<li>
+    						<a class="display-option" id="gallery" href="#">
+    							<span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+    							ดูแบบแกลเลอรี
+    						</a>
+    					</li>
+
+    					<li>
+    						<a class="display-option" id="list" href="#">
+    							<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+    							ดูแบบรายการ
+    						</a>
+    					</li>
+				
+				</ul>
+	</div>
+
+</div>
+  	<div class="container" style="margin-top: 30px;">
+
+  	<div style="font-size: 24px; font-weight: bold; text-align: center; margin-bottom: 20px;">ทั้งหมด {{num}} เมนู</div>
+
+  	<div class="dish-container"></div>
+</div>
+
+<script>
+	var dishResult = {{{result}}};
+	var viewMode = "{{viewMode}}";
+</script>
+
+<script>
+	
+		$(document).on("mouseenter", ".pafesto-wrapper", function() {
+		    $(this).children(".pafesto-text").css('visibility', 'visible');
+		});
+
+		$(document).on("mouseleave", ".pafesto-wrapper", function() {
+		    $(this).children(".pafesto-text").css('visibility', 'hidden');
+		});
+
+		$(document).ready( function(){
+
+			if( viewMode === "list" ){
+				displayList();
+			}
+			else{
+				displayGallery();
+			}
+
+			$(".display-option").click(function(event){
+
+				$.ajax( { 
+					url: "/view_mode/" + $(this).attr('id'), 
+    			});
+
+				if( $(this).attr('id') === 'list' ){
+					viewMode = "list";
+					displayList();
+				}
+				else{
+					viewMode = "gallery";
+					displayGallery();
+				}
+			});
+
+			$(".filter-item").click(function(event){
+  
+  				var lastClass = $(this).attr('class').split(' ').pop();
+				
+	    		var cuisine = getUrlParameter('cuisine');
+	    		var sort = getUrlParameter('sort');
+
+	    		if( lastClass == "cuisine" ){
+	    			cuisine = $(this).attr('id');
+	    		}
+
+	    		if( lastClass == "sort" ){	
+	    			sort = $(this).attr('id');
+	    		}
+
+				
+				var optionList = [];
+
+				if( cuisine !== undefined && cuisine != "0" )
+				{
+					optionList.push( 'cuisine=' + cuisine );
+				}
+
+				if( sort !== undefined && sort != "none" )
+				{
+					optionList.push( 'sort=' + sort );
+				}
+
+				var optionString = getOptionString(optionList);
+
+				var targetUrl = "/dishes";
+
+				if( optionString != "" )
+				{
+					targetUrl += "?" + optionString;
+				}
+				window.location.href = targetUrl;
+				
+				return false;
+			});
+
+			function getUrlParameter( key ){
+				var pageUrl = window.location.search.substring(1);
+				var urlVariables = pageUrl.split('&');
+
+				for( var i = 0; i < urlVariables.length; i++ )
+				{
+					var paramName = urlVariables[i].split('=');
+					if( paramName[0] == key )
+					{
+						return paramName[1];
+					}
+				}
+			}
+
+			function getOptionString( optionList ){
+
+				var optionString = "";
+				for( var i = 0; i < optionList.length; i++ ){
+					
+					optionString += optionList[i];
+
+					if( (i + 1) < optionList.length )
+					{
+						optionString += "&";
+					}
+				}
+
+				return optionString;
+			}
+
+			function displayGallery(){
+
+				var resultString = "";
+
+				for( var i = 0; i < dishResult.length; i++ ){
+
+					resultString += '<div class="col-xs-6 col-md-3"><div class="pafesto-wrapper">';
+					resultString += '<img class="pafesto-image" src="/images/dishes/' + dishResult[i].id + '.png">';
+					resultString += '<div class="pafesto-text dish-name">' + dishResult[i].name + '</div>';
+					resultString += '<div class="pafesto-text dish-price">' + dishResult[i].price + 'บาท</div>';
+					resultString += '<div class="pafesto-text dish-restaurant">ร้าน ' + dishResult[i].restaurant_name + '</div>'; 
+					resultString += '<a class="pafesto-link" href="/dish/' + dishResult[i].id + '"></a></div></div>';
+				}
+				
+				$("#current_view").html( 
+					'<span class="glyphicon glyphicon-th" aria-hidden="true"></span> ดูแบบแกลเลอรี' 
+				);
+				$(".dish-container").html( resultString );
+			}
+
+			function displayList(){
+
+				var resultString = "";
+
+				for( var i = 0; i < dishResult.length; i++ ){
+
+					resultString += '<div class="pafeto-dish-list-wrapper">';
+	      			resultString += '<img class="pafeto-dish-image-list" src="/images/dishes/' + dishResult[i].id + '.png">';
+	      			resultString += '<div class="pafeto-dish-name-list">';
+	      			resultString += '<a href="/dish/' + dishResult[i].id + '">' + dishResult[i].name + '</a></div>';
+	      			resultString += '<div class="pafeto-dish-price-list">' + dishResult[i].price + ' บาท - ';
+
+
+	      			resultString += '<a href="/restaurant/' + dishResult[i].restaurant_id + '">' + dishResult[i].restaurant_name + '</a></div>';
+
+	      
+	      			resultString += '<div class="pafeto-dish-description-list">' + 	dishResult[i].description + '</div>'; 				
+					resultString += '</div><div><hr width="680" ></div>';
+				}
+
+				$("#current_view").html( 
+					'<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> ดูแบบรายการ'
+				);
+				$(".dish-container").html( resultString );
+
+			}
+
+	
+		});
+	
+</script>

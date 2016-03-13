@@ -1,0 +1,62 @@
+<div class="main-content">
+   
+   <div class="pagehead">
+      <div class="container text-center">
+         <div style="width: 650px; margin: auto;">
+            <div> 
+               <img src="/images/restaurants/{{restaurant.id}}.png" width="120px" height="120px">
+            </div>
+            <div class="pafeto-text-title" style="margin-top: 10px">{{restaurant.name}}</div> 
+            <div class="pafeto-text-description" style="margin-top: 5px; font-size: 18px;">
+               {{restaurant.description}}
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="container">
+      <div class="columns">
+         
+         <div class="column one-width">
+
+            <div class="pafeto-info-text"><b>ประเภทอาหาร</b><br>
+               {{restaurant.cuisine_name}}
+            </div>
+            <div class="pafeto-info-text" style="margin-top: 15px"><b>พื้นที่จัดส่ง</b><br>
+               {{areaName}}
+            </div>
+            <div class="pafeto-info-text" style="margin-top: 15px"><b>ลิงก์ของร้าน</b><br>
+    
+               <p>
+                  <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+                  <a href="{{restaurant.link}}">เข้าสู่เว็บไซท์ร้าน</a>
+               </p> 
+
+            </div>
+         </div>
+
+         <div class="column three-width">
+
+            {{#each dishList}}
+            <div class="dish-column">
+               <div class="pafeto-dish-wrapper">
+                  <a class="pafeto-dish-link" href="/dishes/{{this.id}}">
+                     <img class="pafeto-dish-image" src="/images/dishes/{{this.id}}.png"
+                     alt="{{this.name}}">
+                  </a>
+                  <div style="margin-top: 10px;">
+                     <a class="dish-name" href="/dishes/{{this.id}}">{{this.name}}</a>
+                  </div>
+                  <div style="margin-top: 4px;"> 
+                     <span class="dish-price" style="float:left">฿{{this.price}}</span>
+                  </div>
+            
+               </div>
+            </div>
+            {{/each}}
+         
+         </div>
+      </div>
+   </div>
+
+</div>

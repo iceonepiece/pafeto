@@ -1,0 +1,303 @@
+$dish-image-size: 230px;
+$column-one-width: 20%;
+$column-three-width: 80%;
+$container-width: 1000px;
+$dish-name-color: #0066c0;
+$dish-restaurant-color: #757575;
+
+body {
+  font: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, Verdana, sans-serif; }
+
+a.pafeto-text {
+  font: 32px 'Lucida Grande';
+  font-weight: bold;
+  color: #FFFFFF;
+  text-decoration: none; }
+
+a.cuisine-text {
+  color: #606060;
+  text-decoration: none;
+  font-size: 17px; }
+
+a.header-logo{
+  color: #2E80EA;
+  font-size: 26px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.footer{
+  font-size: 16px;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e5e5; 
+}
+
+.page-button{
+  font-size: 18px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 7px;
+  padding-right: 7px;
+  border: 1px solid #ccc;
+
+}
+
+.home-pafeto {
+  font: 64px 'Lucida Grande';
+  font-weight: bold; }
+
+.home-slogan {
+  margin-top: 12px;
+  font-size: 28px; }
+
+.header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    min-width: 1000px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #e5e5e5; 
+  }
+
+.content{
+  height: 450px;
+  min-width: 1000px;
+}
+
+.container {
+  width: $container-width;
+  margin-right: auto;
+  margin-left: auto; }
+
+.pafeto-info-text{
+  font-size: 16px;
+}
+
+.pafeto-dish-info {
+  margin-left: 420px; }
+
+.pafeto-dish-info .pafeto-text-title {
+  font-size: 36px; }
+
+.pafeto-dish-info .pafeto-text-price {
+  margin-top: 10px;
+  font-size: 34px; }
+
+.pafeto-dish-info .pafeto-text-restaurant {
+  margin-top: 8px;
+  font-size: 22px; }
+
+.pafeto-dish-info .pafeto-text-description {
+  margin-top: 12px;
+  font-size: 18px; }
+
+.home {
+  margin-top: 70px;
+  text-align: center; }
+
+.dish-image {
+  position: absolute;
+  width: 360px;
+  height: 360px; }
+
+.columns {
+  margin-right: -10px;
+  margin-left: -10px; }
+
+.column {
+  float: left;
+  padding-right: 8px;
+  padding-left: 8px; }
+
+.one-width {
+  width: $column-one-width; }
+
+.three-width {
+  width: $column-three-width; }
+
+.paginate-container {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+
+
+.pagehead {
+  position: relative;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee; }
+
+a, a:link a:visited, a:hover, a:active {
+ }
+
+li {
+  margin-top: 7px;
+  margin-bottom: 7px; }
+
+.main-container{
+  background-color: #111;
+  display: block;
+}
+
+.sort-bar {
+  padding-left: 20px;
+  padding-right: 20px;
+  border-bottom: 1px solid #f1f1f1;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  background-color: #AAA; 
+}
+
+.sort-bar-bottom {
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #AAA;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0; }
+
+h3 {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0; }
+
+.dish-column {
+  float: left;
+  width: 33%; }
+
+.pafeto-dish-wrapper {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-left: 15px;
+  box-shadow: 0 0 7px 0 #ddd;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  height: 300px;
+  width: 230px; 
+}
+
+.pafeto-dish-image {
+  height: $dish-image-size;
+  width: $dish-image-size;
+}
+
+.pafeto-dish-link {
+  position: relative;
+  width: $dish-image-size;
+  height: $dish-image-size; 
+}
+
+
+.pafeto-hover-text{
+  position: relative;
+}
+
+.pafeto-text-title {
+  font-size: 30px;
+  font-weight: bold; }
+
+.dish-name {
+  color: $dish-name-color;
+  font-size: 16px; 
+}
+
+.dish-price {
+  font-weight: bold;
+  color: #b12704;
+  padding-left: 4px;
+  padding-right: 4px;
+  float: right;
+  font-size: 16px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+
+.dish-restaurant {
+  margin-top: 2px;
+  float: left;
+  font-size: 15px;
+}
+
+.pafeto-dish-name {
+  font-size: 28px;
+  font-weight: bold; }
+
+.pafeto-dish-restaurant {
+  font-size: 24px; }
+
+.pafeto-dish-price {
+  font-size: 20px; }
+
+.pafeto-dish-description {
+  margin-top: 10px;
+  font-size: 18px; }
+
+.pafeto-restaurant-wrapper {
+  margin: 0 auto;
+  width: 750px;
+  height: 140px;
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+.pafeto-restaurant-image {
+  width: 140px;
+  height: 140px;
+  position: absolute; }
+
+.pafeto-restaurant-name {
+  margin-left: 180px;
+  font-weight: bold;
+  font-size: 22px; }
+
+.pafeto-restaurant-cuisine {
+  font-size: 18px;
+  margin-top: 5px;
+  margin-left: 180px; }
+
+.pafeto-restaurant-description {
+  color: #777777;
+  font-size: 16px; }
+
+.pafeto-dish-list-wrapper {
+  margin: 0 auto;
+  width: 680px;
+  height: 140px;
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+.pafeto-dish-name-list {
+  margin-top: 10px;
+  margin-left: 160px;
+  font-weight: bold;
+  font-size: 22px; }
+
+.pafeto-dish-price-list {
+  margin-top: 3px;
+  margin-left: 160px;
+  font-weight: bold;
+  font-size: 20px; }
+
+.pafeto-dish-restaurant-list {
+  margin-left: 160px;
+  font-size: 17px; }
+
+.pafeto-dish-description-list {
+  margin-top: 3px;
+  color: #575757;
+  margin-left: 160px;
+  font-size: 16px; }
+
+.pafeto-dish-image-list {
+  position: absolute;
+  width: 140px;
+  height: 140px; }
+

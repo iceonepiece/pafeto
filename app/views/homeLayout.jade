@@ -1,0 +1,22 @@
+doctype html
+html
+	head
+		title= title
+		link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', rel='stylesheet')
+		link(href='/css/pafeto.css', rel="stylesheet")
+		script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+
+	body
+		div(class='header')
+			div(class='container') 
+				a(href='/', class='header-logo') pafeto
+
+		div(class='content')
+			div(class='container text-center')
+				block content
+
+		div(class='footer') หากมีข้อสงสัย ข้อเสนอแนะหรือติชมอะไร ติดต่อผู้พัฒนาได้ที่ thepafeto@gmail.com
+			p(class='text-muted') Pafeto © 2015
+		
+		block script

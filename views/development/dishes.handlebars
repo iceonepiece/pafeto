@@ -1,0 +1,236 @@
+<div class="main-content">
+	
+	<div class="pagehead">
+		<div class="container text-center">
+			<h1>ค้นหาเมนูอาหาร</h1>
+			<div class="btn-group" style="margin-top: 20px">
+  
+
+				<button type="button" class="btn btn-default btn-lg" style="width: 300px" >
+					<font style="float: left">
+					<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+					</font>
+					{{currentArea}}
+				</button>
+
+			  	<button type="button" class="btn btn-default btn-lg dropdown-toggle" 
+			  		data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    	<span class="caret"></span>
+			    	<span class="sr-only">Toggle Dropdown</span>
+			  	</button>
+
+			  	<ul class="dropdown-menu">
+			  	{{#each areaList}}
+			  		<li>
+			    		<a class="area-filter" id="{{@key}}" href="/dishes?area={{@key}}">{{this}}</a>
+			    	</li>
+			  	{{/each}}
+			</div>
+
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="columns">
+			<div class="column one-width" >
+				<h3 style="margin-bottom: 10px">ประเภทอาหาร</h3>
+				<ul class="list-unstyled">
+
+					{{#each cuisineFilters}}
+    					<li>
+    						<a class="filter-item cuisine-text" id="{{this.index}}" href="/dishes?cuisines={{this.index}}">
+    							<span style="color: #FA4500" class="glyphicon glyphicon-{{this.checking}}" aria-hidden="true"></span>
+    							{{this.name}}
+    						</a>
+    					</li>
+					{{/each}}
+					
+					
+				</ul>
+
+			</div>
+			
+			<div class="column three-width">
+				<div class="sort-bar">
+				
+					<div class="btn-group" style="float: right; position: relative">
+	  
+						<button type="button" class="btn btn-default" style="width: 150px" >
+							{{currentSort}}
+						</button>
+
+					  	<button type="button" class="btn btn-default dropdown-toggle" 
+					  		data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    	<span class="caret"></span>
+					    	<span class="sr-only">Toggle Dropdown</span>
+					  	</button>
+
+					  	<ul class="dropdown-menu">
+					    		<li><a class="filter-item sort" id="none" href="/dishes?sort=none">ไม่เรียง</a></li>
+					    		<li><a class="filter-item sort" id="price_asc" href="/dishes?sort=price_asc">ราคาน้อยไปมาก</a></li>
+					    		<li><a class="filter-item sort" id="price_desc" href="/dishes?sort=price_desc">ราคามากไปน้อย</a></li>
+						</ul>
+					</div>
+					<h3>พบทั้งหมด {{dishList.length}} เมนู</h3>
+				</div>
+
+				{{#each dishList}}
+				<div class="dish-column">
+					<div class="pafeto-dish-wrapper">
+						<a class="pafeto-dish-link" href="/dishes/{{this.id}}">
+					  		<img class="pafeto-dish-image" src="/images/dishes/{{this.id}}.png"
+					  		alt="{{this.name}}">
+					  	</a>
+					  	<div style="margin-top: 10px;">
+					  		<a class="dish-name" href="/dishes/{{this.id}}">{{this.name}}</a>
+					  	</div>
+					  	<div style="margin-top: 4px;"> 
+					  		<span class="dish-restaurant">
+					  			ร้าน 
+					  			<a href="/restaurants/{{this.restaurant_id}}">
+					  				<b>{{this.restaurant_name}}</b>
+					  			</a>
+					  		</span>
+					  		<span class="dish-price">฿{{this.price}}</span>
+					  	</div>
+				
+					</div>
+				</div>
+				{{/each}}
+			
+
+
+			</div>
+		</div>
+	<div>
+		
+
+	</div>
+</div>
+
+<script>
+	
+	$(document).ready( function(){
+
+		$(".filter-item").click(function(event){
+			
+			// get original url
+			var urlVariables = window.location.search.substring(1).split('&');
+			var area = getUrlParameter( "area", urlVariables );
+			var cuisines = getCuisines( urlVariables );
+			var sort = getUrlParameter( "sort", urlVariables );
+			// ------
+
+			// edit url
+			var lastClass = $(this).attr('class').split(' ').pop();
+
+			if( lastClass === "cuisine-text" ){
+
+				var cuisineId = $(this).attr('id');
+				
+				var index = getIndexOf( cuisineId, cuisines );
+  			
+  				if( index == -1 ){
+  					cuisines.push( cuisineId );
+  				}
+  				else{
+  					cuisines.splice( index, 1 );
+  				}
+			}
+			else if( lastClass === "sort" ){
+
+				var sortType = $(this).attr('id');
+				
+				if( sortType === "none" ){
+					sort = "";
+				}
+				else{
+					sort = "sort=" + sortType;
+				}			
+			}
+			// --------
+	
+			var optionList = [];
+
+			// add area
+			optionList.push( area );
+
+			// add cuisines
+			for( var i = 0; i < cuisines.length; i++ ){
+				optionList.push( "cuisines=" + cuisines[i] );
+			}
+
+			// add sort
+			if( sort.length > 0 ){
+				optionList.push( sort );
+			}
+
+			var extendUrl = getOptionString(optionList);
+		
+			var targetUrl = "/dishes";
+
+			if( extendUrl != "" )
+			{
+				targetUrl += "?" + extendUrl;
+			}
+			
+			window.location.href = targetUrl;			
+			return false;			
+  		});
+
+		function getIndexOf( value, array ){
+
+			for( var i = 0; i < array.length; i++ ){
+				if( value === array[i] ){
+					return i;
+				}
+			}
+
+			return -1;
+		}
+
+		function getOptionString( optionList ){
+
+			var optionString = "";
+			for( var i = 0; i < optionList.length; i++ ){
+					
+				optionString += optionList[i];
+
+				if( (i + 1) < optionList.length )
+				{
+					optionString += "&";
+				}
+			}
+
+			return optionString;
+		}
+
+  		function getCuisines( urlVariables ){
+
+  			var cuisines = [];
+
+  			for( var i = 0; i < urlVariables.length; i++ ){
+				var paramName = urlVariables[i].split('=');
+				if( paramName[0] === "cuisines" ){
+					cuisines.push( paramName[1] );
+				}
+			}
+			return cuisines;
+  		}
+
+  		function getUrlParameter( key, urlVariables ){
+
+			for( var i = 0; i < urlVariables.length; i++ )
+			{
+				var paramName = urlVariables[i].split('=');
+				if( paramName[0] == key )
+				{
+					return key + "=" + paramName[1];
+				}
+			}
+			return "";
+		}
+
+	});
+
+</script>

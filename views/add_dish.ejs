@@ -1,0 +1,32 @@
+<!doctype html>
+
+<html>
+<head>
+</head>
+<body>
+
+	<h3>Add dish</h3>
+	<form method='post' action='/add_dish'>
+		<div>id: <input type='text' name='id'></div>
+		<div>name: <input type='text' name='name'></div>
+		<div>price: <input type='text' name='price'></div>
+		<div>description: <input type='text' name='description'></div>
+		<div>restaurant_id: <input type='text' name='restaurant_id'></div>
+		<div>cuisine_id: <input type='text' name='cuisine_id'></div>
+		<div><input type='submit' value="OK"></div>
+	</form>
+	<% for(var i=0; i<restaurants.length; i++) {%>
+   <li><%= restaurants[i].id %> <%= restaurants[i].name %></li>
+<% } %>
+
+	<h3>Add Restaurant</h3>
+	<form method='post' action='/add_restaurant'>
+		<div>id: <input type='text' name='id'></div>
+		<div>name: <input type='text' name='name'></div>
+		<div>description: <input type='text' name='description'></div>
+		<div>link: <input type='text' name='link'></div>
+		<div>cuisine_id: <input type='text' name='cuisine_id'></div>
+		<div><input type='submit' value="OK"></div>
+	</form>
+</body>
+</html>

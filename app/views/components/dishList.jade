@@ -1,0 +1,14 @@
+each dish in dishList
+	div.dish-column
+		div(class="pafeto-dish-wrapper")
+			a(class="pafeto-dish-link", href="/dishes/" + dish.id)
+				img(class="pafeto-dish-image", src="/img/dishes/" + dish.id + ".png" alt=dish.name)
+
+			div(style="margin-top: 10px; padding-left: 10px; padding-right: 10px;")
+				a(class="dish-name", href="/dishes/" + dish.id)= dish.name
+
+			div(style="margin-top: 4px; padding-left: 10px; padding-right: 10px;")
+				span(class="dish-restaurant")
+					a(href="/restaurants/" + dish.restaurant_id)
+						font(style='color: #454545;')= dish.restaurant_name
+				span(class="dish-price") ฿#{dish.price}
